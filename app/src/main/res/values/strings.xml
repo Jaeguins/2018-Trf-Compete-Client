@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">2018-Trf-Compete-Client</string>
+    <string name="map_button_name">목적지 선택하여 운전하기</string>
+    <string name="freeDrive_button_name">자유롭게 운전하기</string>
+    <string name="statistic_button_name">운전습관 확인하기</string>
+    <string name="settings">설정</string>
 </resources>
