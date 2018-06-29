@@ -13,7 +13,6 @@
     <style name="ButtonTheme">
         <item name="android:radius">5dp</item>
         <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:height">80dp</item>
         <item name="android:left">0dp</item>
         <item name="android:top">0dp</item>
         <item name="android:right">0dp</item>
@@ -21,5 +20,30 @@
         <item name="android:translationZ">2dp</item>
         <item name="android:textColor">@color/colorFont</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:strokeWidth">1</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">3dp</item>
+
+        <item name="android:strokeColor">@color/colorAccent</item>
+    </style>
+    <style name="searchResultTitle">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorFont</item>
+    </style>
+    <style name="searchResultAdress">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/colorFont</item>
+    </style>
+    <style name="searchTextInput">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textColorLink">@color/colorFont</item>
+        <item name="android:textColorHint">@color/colorFont</item>
+        <item name="android:textColorHighlight">@color/colorFont</item>
+
+    </style>
+    <style name="searchResultBox">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_margin">3dp</item>
     </style>
 </resources>

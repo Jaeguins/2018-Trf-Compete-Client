@@ -12,36 +12,36 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintBottom_toTopOf="@+id/mapButton"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/mapButton"
         style="@style/ButtonTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/map"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/freeDriveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/freeDriveButton"
         style="@style/ButtonTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/freeDrive"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/statistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/statistics"
         style="@style/ButtonTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

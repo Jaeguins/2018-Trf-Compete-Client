@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">2018-Trf-Compete-Client</string>
-    <string name="map">목적지 선택하여 운전하기</string>
-    <string name="freeDrive">자유롭게 운전하기</string>
-    <string name="statistic">운전습관 확인하기</string>
-    <string name="settings">설정</string>
+    <string name="map">Set destination in map</string>
+    <string name="freeDrive">Free driving</string>
+    <string name="statistic">Statistics</string>
+    <string name="settings">Settings</string>
+    <string name="mapSearchTooltip">Put location name for search</string>
+    <string name="directions">directions</string>
 </resources>
