@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(MainActivity.this,PreDrive.class);
-                i.putExtra("free",10);
+                i.setAction("free");
                 startActivity(i);
             }
         });

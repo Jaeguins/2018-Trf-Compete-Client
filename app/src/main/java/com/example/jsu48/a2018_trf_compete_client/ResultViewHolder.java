@@ -1,5 +1,6 @@
 package com.example.jsu48.a2018_trf_compete_client;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,9 +19,11 @@ class ResultViewHolder extends RecyclerView.ViewHolder{
         dirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent("map");
-                i.putExtra("longitude",longitude);
-                i.putExtra("latitude",latitude);
+                Intent intent=new Intent(view.getContext(),PreDrive.class);
+                intent.setAction("map");
+                intent.putExtra("longitude",longitude);
+                intent.putExtra("latitude",latitude);
+                view.getContext().startActivity(intent);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.example.jsu48.a2018_trf_compete_client;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

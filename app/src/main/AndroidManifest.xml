@@ -23,6 +23,15 @@
         <activity android:name=".Statistic">
 
         </activity>
+        <activity android:name=".PreDrive">
+
+        </activity>
+        <activity android:name=".FreeDrive">
+
+        </activity>
+        <activity android:name=".Tmapping">
+
+        </activity>
     </application>
 
 </manifest>

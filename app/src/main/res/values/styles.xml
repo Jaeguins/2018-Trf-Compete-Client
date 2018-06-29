@@ -49,4 +49,8 @@
     <style name="searchBar">
         <item name="android:background">@color/colorPrimary</item>
     </style>
+    <style name="preDriveText">
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textSize">30dp</item>
+    </style>
 </resources>
