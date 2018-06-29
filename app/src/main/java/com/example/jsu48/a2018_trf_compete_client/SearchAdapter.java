@@ -30,6 +30,8 @@ public class SearchAdapter extends RecyclerView.Adapter<ResultViewHolder> {
         SearchResult result=items.get(i);
         resultViewHolder.mName.setText(result.getName());
         resultViewHolder.mAdress.setText(result.getAdress());
+        resultViewHolder.setLatitude(result.getLatitude());
+        resultViewHolder.setLongitude(result.getLongitude());
     }
 
     @Override

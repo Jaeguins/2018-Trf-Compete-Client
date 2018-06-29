@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 public class SearchResult {
     String adress,Name;
+    double longitude,latitude;
     public String getAdress() {
         return adress;
     }
@@ -21,5 +22,21 @@ public class SearchResult {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
