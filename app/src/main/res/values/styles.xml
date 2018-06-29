@@ -8,6 +8,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
     </style>
-
+    <style name="ButtonTheme">
+        <item name="android:radius">5dp</item>
+        <item name="android:color">@color/colorPrimaryDark</item>
+        <item name="android:height">80dp</item>
+        <item name="android:left">0dp</item>
+        <item name="android:top">0dp</item>
+        <item name="android:right">0dp</item>
+        <item name="android:bottom">0dp</item>
+        <item name="android:translationZ">2dp</item>
+    </style>
 </resources>

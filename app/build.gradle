@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.sangwoo.a2018_trf_compete_client"
-        minSdkVersion 19
+        applicationId "com.example.jsu48.a2018_trf_compete_client"
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

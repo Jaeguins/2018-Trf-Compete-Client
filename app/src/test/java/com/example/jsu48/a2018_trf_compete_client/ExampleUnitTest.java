@@ -1,4 +1,4 @@
-package com.example.sangwoo.a2018_trf_compete_client;
+package com.example.jsu48.a2018_trf_compete_client;
 
 import org.junit.Test;
 

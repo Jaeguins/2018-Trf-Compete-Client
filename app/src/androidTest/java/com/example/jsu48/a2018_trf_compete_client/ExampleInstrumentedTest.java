@@ -1,4 +1,4 @@
-package com.example.sangwoo.a2018_trf_compete_client;
+package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.sangwoo.a2018_trf_compete_client", appContext.getPackageName());
+        assertEquals("com.example.jsu48.a2018_trf_compete_client", appContext.getPackageName());
     }
 }
