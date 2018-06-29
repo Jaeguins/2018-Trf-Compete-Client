@@ -12,12 +12,14 @@
     </style>
     <style name="ButtonTheme">
         <item name="android:radius">5dp</item>
-        <item name="android:color">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:height">80dp</item>
         <item name="android:left">0dp</item>
         <item name="android:top">0dp</item>
         <item name="android:right">0dp</item>
         <item name="android:bottom">0dp</item>
         <item name="android:translationZ">2dp</item>
+        <item name="android:textColor">@color/colorFont</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
