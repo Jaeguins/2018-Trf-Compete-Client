@@ -21,6 +21,10 @@ public class SearchAdapter extends RecyclerView.Adapter<ResultViewHolder> {
         items.add(data);
         notifyDataSetChanged();
     }
+    public void deleteAll(){
+        items.clear();
+        notifyDataSetChanged();
+    }
     @Override
     public void onBindViewHolder(@NonNull ResultViewHolder resultViewHolder, int i) {
         SearchResult result=items.get(i);
