@@ -32,6 +32,9 @@
         <activity android:name=".Tmapping">
 
         </activity>
+        <activity android:name=".SubDrive">
+
+        </activity>
     </application>
 
 </manifest>
