@@ -4,7 +4,7 @@
     <string name="freeDrive">Free driving</string>
     <string name="statistic">Statistics</string>
     <string name="settings">Settings</string>
-    <string name="mapSearchTooltip">Put location name for search</string>
+    <string name="mapSearchTooltip">Search...</string>
     <string name="directions">directions</string>
     <string name="todo">TODO</string>
     <string name="seatbelts">Take seatbelts</string>

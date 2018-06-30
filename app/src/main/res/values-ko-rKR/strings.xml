@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">2018-Trf-Compete-Client</string>
+    <string name="map">목적지를 정하여 출발하기</string>
+    <string name="freeDrive">자유주행으로 출발하기</string>
+    <string name="statistic">운전습관 확인하기</string>
+    <string name="settings">설정</string>
+    <string name="mapSearchTooltip">검색할 지명을 입력하세요</string>
+    <string name="directions">길찾기</string>
+    <string name="todo">할일</string>
+    <string name="seatbelts">안전벨트를 확인하세요!</string>
+    <string name="handbrake">주차브레이크를 풀어주세요</string>
+    <string name="headlight">주변이 어두우면, 전조등을 켜세요</string>
+</resources>
