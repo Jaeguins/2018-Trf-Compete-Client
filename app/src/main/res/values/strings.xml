@@ -17,4 +17,8 @@
     <string name="cautionFreedrive">You are in free-driving.\nYour driving pattern is still recorded.</string>
     <string name="driveEnd">End up drive</string>
     <string name="TmapCaution">Navigating with Tmap.\nCourse was set by Safety.</string>
+    <string name="seatbeltR">Take off seatbelts</string>
+    <string name="handbrakeR">Take the handbrake</string>
+    <string name="headlightR">Turn the headlights on if you did</string>
+    <string name="gearR">Change gear to Parking</string>
 </resources>

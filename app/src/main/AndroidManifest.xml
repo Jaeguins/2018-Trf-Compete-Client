@@ -29,9 +29,6 @@
         <activity android:name=".Driving">
 
         </activity>
-        <activity android:name=".SubDrive">
-
-        </activity>
         <activity android:name=".Settings">
 
         </activity>

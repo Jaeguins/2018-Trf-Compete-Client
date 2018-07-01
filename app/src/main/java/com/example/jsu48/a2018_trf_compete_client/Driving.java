@@ -24,8 +24,7 @@ public class Driving extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(Driving.this,SubDrive.class);
-                startActivity(i);
+                Driving.this.finish();
             }
         });
         i=getIntent();
