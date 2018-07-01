@@ -7,32 +7,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.skt.Tmap.TMapPOIItem;
+import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<ResultViewHolder> {
+    public SearchAdapter(TMapView index){
+        this.index=index;
+    }
+    TMapView index;
     @NonNull
     @Override
     public ResultViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_result,viewGroup,false);
         return new ResultViewHolder(v);
     }
-    List<SearchResult> items=new ArrayList<>();
-    public void add(SearchResult data){
+    List<TMapPOIItem> items=new ArrayList<>();
+    public void add(TMapPOIItem data){
         items.add(data);
-
     }
     public void deleteAll(){
         items.clear();
-        notifyDataSetChanged();
     }
     @Override
     public void onBindViewHolder(@NonNull ResultViewHolder resultViewHolder, int i) {
-        SearchResult result=items.get(i);
-        resultViewHolder.mName.setText(result.getName());
-        resultViewHolder.mAdress.setText(result.getAdress());
-        resultViewHolder.setLatitude(result.getLatitude());
-        resultViewHolder.setLongitude(result.getLongitude());
+        TMapPOIItem result=items.get(i);
+        resultViewHolder.mName.setText(result.getPOIName().toString());
+        resultViewHolder.mAddress.setText(result.getPOIAddress().toString().replace("null",""));
+        TMapPoint p=result.getPOIPoint();
+        resultViewHolder.setLatitude(p.getLatitude());
+        resultViewHolder.setLongitude(p.getLongitude());
+        resultViewHolder.setInd(index);
     }
 
     @Override

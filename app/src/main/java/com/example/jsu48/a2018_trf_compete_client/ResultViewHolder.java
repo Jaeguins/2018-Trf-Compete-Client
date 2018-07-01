@@ -7,13 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.skt.Tmap.TMapView;
+
 class ResultViewHolder extends RecyclerView.ViewHolder{
-    public TextView mAdress,mName;
+    public TextView mAddress,mName;
     public Button dirBtn;
+    public TMapView ind;
     double longitude,latitude;
     public ResultViewHolder(View itemView){
         super(itemView);
-        mAdress=(TextView)itemView.findViewById(R.id.resultAdress);
+        mAddress=(TextView)itemView.findViewById(R.id.resultAdress);
         mName=(TextView)itemView.findViewById(R.id.resultTitle);
         dirBtn=(Button)itemView.findViewById(R.id.directionButton);
         dirBtn.setOnClickListener(new View.OnClickListener() {
@@ -26,6 +29,15 @@ class ResultViewHolder extends RecyclerView.ViewHolder{
                 view.getContext().startActivity(intent);
             }
         });
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ind.setCenterPoint(longitude,latitude,true);
+            }
+        });
+    }
+    public void setInd(TMapView ind){
+        this.ind=ind;
     }
 
     public double getLongitude() {
