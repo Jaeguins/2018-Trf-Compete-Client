@@ -9,7 +9,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/quickStartLayout"
-        style="@style/statisticContainer"
+        style="@style/itemContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/quickStartTitle"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/quickStartValue"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -49,7 +49,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/quickStopLayout"
-        style="@style/statisticContainer"
+        style="@style/itemContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/quickStopTitle"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/quickStopValue"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -90,7 +90,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/safetySpeedLayout"
-        style="@style/statisticContainer"
+        style="@style/itemContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -101,7 +101,7 @@
 
         <TextView
             android:id="@+id/safetySpeedTitle"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -115,7 +115,7 @@
 
         <TextView
             android:id="@+id/safetySpeedValue"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -129,7 +129,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/overSpeedLayout"
-        style="@style/statisticContainer"
+        style="@style/itemContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -140,7 +140,7 @@
 
         <TextView
             android:id="@+id/overSpeedTitle"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -156,7 +156,7 @@
 
         <TextView
             android:id="@+id/overSpeedValue"
-            style="@style/statisticItem"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

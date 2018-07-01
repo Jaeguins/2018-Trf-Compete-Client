@@ -35,6 +35,9 @@
         <activity android:name=".SubDrive">
 
         </activity>
+        <activity android:name=".Settings">
+
+        </activity>
     </application>
 
 </manifest>

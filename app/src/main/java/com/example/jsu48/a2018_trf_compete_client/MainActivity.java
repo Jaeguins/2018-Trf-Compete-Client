@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button mapBtn,freeBtn,statBtn;
+    Button mapBtn,freeBtn,statBtn,setBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        setBtn=findViewById(R.id.settingButton);
+        setBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(MainActivity.this,Settings.class);
+                i.putExtra("set",10);
+                startActivity(i);
+            }
+        });
     };
 }
