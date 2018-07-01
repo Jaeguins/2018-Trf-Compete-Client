@@ -17,6 +17,7 @@ public class PreDrive extends AppCompatActivity {
     TextView txt;
     int count=0;
     Intent i;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class PreDrive extends AppCompatActivity {
         i=getIntent();
         img=findViewById(R.id.imgView);
         txt=findViewById(R.id.textView);
+        intent=new Intent(PreDrive.this,Driving.class);
         findViewById(R.id.activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,13 +40,11 @@ public class PreDrive extends AppCompatActivity {
                     break;
                 case 2:
                     if("map".equals(i.getAction())){
-                        Intent intent=new Intent(PreDrive.this,Tmapping.class);
                         intent.setAction("map");
                         intent.putExtra("longitude",i.getDoubleExtra("longitude",-1.0));
                         intent.putExtra("latitude",i.getDoubleExtra("latitude",-1.0));
                         startActivity(intent);
                     }else{
-                        Intent intent=new Intent(PreDrive.this,FreeDrive.class);
                         intent.setAction("free");
                         startActivity(intent);
                     }

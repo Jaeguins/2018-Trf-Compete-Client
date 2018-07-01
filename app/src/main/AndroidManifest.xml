@@ -26,10 +26,7 @@
         <activity android:name=".PreDrive">
 
         </activity>
-        <activity android:name=".FreeDrive">
-
-        </activity>
-        <activity android:name=".Tmapping">
+        <activity android:name=".Driving">
 
         </activity>
         <activity android:name=".SubDrive">
