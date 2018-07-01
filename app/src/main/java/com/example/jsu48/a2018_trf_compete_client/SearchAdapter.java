@@ -20,7 +20,7 @@ public class SearchAdapter extends RecyclerView.Adapter<ResultViewHolder> {
     List<SearchResult> items=new ArrayList<>();
     public void add(SearchResult data){
         items.add(data);
-        notifyDataSetChanged();
+
     }
     public void deleteAll(){
         items.clear();
