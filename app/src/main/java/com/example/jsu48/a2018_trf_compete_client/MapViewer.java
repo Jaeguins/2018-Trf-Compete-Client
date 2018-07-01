@@ -2,12 +2,15 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.skt.Tmap.TMapView;
@@ -44,10 +47,10 @@ public class MapViewer extends AppCompatActivity {
                 adap.deleteAll();
                 searchShow.setVisibility(View.VISIBLE);
                 recyclerView.bringToFront();
-                //TextInputEditText k=(TextInputEditText)view.findViewById(R.id.textInputLayout2);
+                //TODO get text from inputTextLayout
                 for(int i=0;i<50;i++){
                     SearchResult t=new SearchResult();
-                    t.setAdress("주소"+i);
+                    t.setAdress("주소".toString()+i);
                     t.setName("지명"+i);
                     adap.add(t);
                 }
