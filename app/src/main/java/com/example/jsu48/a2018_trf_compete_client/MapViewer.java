@@ -115,7 +115,7 @@ public class MapViewer extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
-                    case EditorInfo.IME_ACTION_SEARCH:
+                    case EditorInfo.IME_ACTION_DONE:
                         searchLoc(input.getText().toString());
                         break;
                     default:
