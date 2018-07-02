@@ -39,7 +39,7 @@ public class MapViewer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.tmap);
+        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.marker);
         bitmap = Bitmap.createScaledBitmap(bitmap, 50, 100, false);
         searchShow = findViewById(R.id.searchShow);
         tmapLayView = findViewById(R.id.tMapLayout);
