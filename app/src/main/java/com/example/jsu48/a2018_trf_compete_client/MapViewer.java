@@ -3,6 +3,7 @@ package com.example.jsu48.a2018_trf_compete_client;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class MapViewer extends AppCompatActivity {
     TMapView tMapView;
     TMapData tmapdata;
     Bitmap bitmap;
-
+    TMapMarkerItem formerMarker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class MapViewer extends AppCompatActivity {
         tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         tmapLayView.addView(tMapView);
+        formerMarker=new TMapMarkerItem();
         searchBtn = findViewById(R.id.searchButton);
         closeSearchResult = findViewById(R.id.closeSearchResult);
         adap = new SearchAdapter(tMapView);
@@ -67,13 +69,29 @@ public class MapViewer extends AppCompatActivity {
         closeSearchResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchShow.setVisibility(View.GONE);
-                adap.deleteAll();
+                closeSearch();
+            }
+        });
+        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+            @Override
+            public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                if(arrayList.size()>0){
+                    formerMarker.setCanShowCallout(false);
+                    formerMarker=arrayList.get(0);
+                    formerMarker.setCanShowCallout(true);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                return false;
             }
         });
         tMapView.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
             @Override
             public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
+                closeSearch();
                 try {
                     tmapdata.convertGpsToAddress(tMapPoint.getLatitude(), tMapPoint.getLongitude(),
                             new TMapData.ConvertGPSToAddressListenerCallback() {
@@ -103,6 +121,7 @@ public class MapViewer extends AppCompatActivity {
                     markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                     markerItem1.setTMapPoint(item.getPOIPoint()); // 마커의 좌표 지정
                     markerItem1.setName(item.getPOIName()); // 마커의 타이틀 지정
+                    markerItem1.setCalloutTitle(item.getPOIName());
                     tMapView.addMarkerItem("marker" + i, markerItem1);
                     adap.add(item);
                 }
@@ -116,5 +135,9 @@ public class MapViewer extends AppCompatActivity {
                 tMapView.setCenterPoint(tCent.getPOIPoint().getLongitude(), tCent.getPOIPoint().getLatitude(), true);
             }
         });
+    }
+    public void closeSearch(){
+        searchShow.setVisibility(View.GONE);
+        adap.deleteAll();
     }
 }
