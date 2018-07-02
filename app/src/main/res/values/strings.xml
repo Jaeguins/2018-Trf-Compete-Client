@@ -21,4 +21,6 @@
     <string name="handbrakeR">Take the handbrake</string>
     <string name="headlightR">Turn the headlights on if you did</string>
     <string name="gearR">Change gear to Parking</string>
+    <string name="searchResultHint">Location found : </string>
+    <string name="searchResultZero">Can\'t find any location</string>
 </resources>
