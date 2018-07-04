@@ -5,12 +5,12 @@ import android.graphics.*;
 import com.skt.Tmap.*;
 
 import java.util.ArrayList;
-public class CustTMapView extends TMapView{
+public class DestTMapView extends TMapView{
         TMapData tmapdata;
         Bitmap mapMarker;
         TMapMarkerItem formerMarker=new TMapMarkerItem();
         CustLongClickCallback longCall;
-public CustTMapView(Context context,int src){
+public DestTMapView(Context context, int src){
         super(context);
         mapMarker = BitmapFactory.decodeResource(this.getResources(), src);
         mapMarker=Bitmap.createScaledBitmap(mapMarker, 50, 100, false);
@@ -59,7 +59,7 @@ class CustLongClickCallback implements TMapView.OnLongClickListenerCallback{
         tmapdata.findAllPOI(keyWord, new TMapData.FindAllPOIListenerCallback() {
             @Override
             public void onFindAllPOI(ArrayList poiItem) {
-                final MapViewer cont=(MapViewer)CustTMapView.this.getContext();
+                final MapViewer cont=(MapViewer) DestTMapView.this.getContext();
                 cont.resultNum = poiItem.size();
                 removeAllMarkerItem();
                 if (poiItem.size() > 0) {

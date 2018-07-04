@@ -26,7 +26,7 @@ public class MapViewer extends AppCompatActivity {
     LinearLayoutManager layManager;
     LinearLayout tmapLayView;
     ConstraintLayout searchShow;
-    CustTMapView tMapView;
+    DestTMapView tMapView;
     GPSManager gps;
     TextView searchResult;
     EditText input;
@@ -44,7 +44,7 @@ public class MapViewer extends AppCompatActivity {
         gps=new GPSManager(this);
         searchShow = findViewById(R.id.searchShow);
         tmapLayView = findViewById(R.id.tMapLayout);
-        tMapView = new CustTMapView(this,R.drawable.marker);
+        tMapView = new DestTMapView(this,R.drawable.marker);
         tmapLayView.addView(tMapView);
         searchBtn = findViewById(R.id.searchButton);
         closeSearchResult = findViewById(R.id.closeSearchResult);
