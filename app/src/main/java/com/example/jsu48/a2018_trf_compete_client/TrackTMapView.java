@@ -7,8 +7,8 @@ import com.skt.Tmap.TMapView;
 public class TrackTMapView extends TMapView {
     public TrackTMapView(Context context) {
         super(context);
-        this.setTrackingMode(true);
+        setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         this.setCompassMode(true);
-        
+
     }
 }

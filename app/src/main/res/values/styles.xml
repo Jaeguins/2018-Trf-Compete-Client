@@ -62,4 +62,16 @@
     <style name="freedriveCaution">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+    <style name="sign">
+        <item name="android:width">100dp</item>
+        <item name="android:height">100dp</item>
+    </style>
+    <style name="nowTurn">
+        <item name="android:width">150dp</item>
+        <item name="android:height">150dp</item>
+    </style>
+    <style name="nextTurn">
+        <item name="android:width">500dp</item>
+        <item name="android:height">500dp</item>
+    </style>
 </resources>

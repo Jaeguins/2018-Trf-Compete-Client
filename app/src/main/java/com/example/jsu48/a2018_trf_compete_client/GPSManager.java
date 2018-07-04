@@ -18,7 +18,7 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 
 public class GPSManager extends Service implements LocationListener {
-    private final Context mContext;
+    private Context mContext;
     // 현재 GPS 사용유무
     boolean isGPSEnabled = false;
     // 네트워크 사용유무
@@ -34,12 +34,11 @@ public class GPSManager extends Service implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
 
     protected LocationManager locationManager;
-
     public GPSManager(Context context) {
+        super();
         this.mContext = context;
         getLocation();
     }
-
     @TargetApi(23)
     public Location getLocation() {
         if (Build.VERSION.SDK_INT >= 23 &&

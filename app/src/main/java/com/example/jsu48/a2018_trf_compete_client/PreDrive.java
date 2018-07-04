@@ -26,7 +26,7 @@ public class PreDrive extends AppCompatActivity {
         i = getIntent();
         img = findViewById(R.id.imgView);
         txt = findViewById(R.id.textView);
-        intent = new Intent(PreDrive.this, Driving.class);
+        intent = new Intent(PreDrive.this, Tracking.class);
         findViewById(R.id.activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

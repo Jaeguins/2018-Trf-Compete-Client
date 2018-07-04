@@ -26,15 +26,13 @@
         <activity android:name=".PreDrive">
 
         </activity>
-        <activity android:name=".Driving">
+        <activity android:name=".Tracking">
 
         </activity>
         <activity android:name=".Settings">
 
         </activity>
-
         <service android:name=".DrivingService" />
-        <service android:name=".GPSManager" />
     </application>
 
 </manifest>
