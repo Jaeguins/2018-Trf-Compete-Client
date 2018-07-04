@@ -56,9 +56,9 @@ public class MapViewer extends AppCompatActivity {
         layManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layManager);
         recyclerView.setAdapter(adap);
-
         input =findViewById(R.id.inputLoc);
         searchResult = findViewById(R.id.searchResultHint);
+        tMapView.setCompassMode(true);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

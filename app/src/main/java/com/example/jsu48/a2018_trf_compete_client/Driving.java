@@ -29,19 +29,23 @@ public class Driving extends AppCompatActivity {
         });
         i=getIntent();
         String state=i.getAction();
+        Intent tIntent=new Intent(Driving.this,DrivingService.class);
         if(state.equals("map")){
             drivingTitle.setText(R.string.map);
             drivingCaution.setText(R.string.TmapCaution);
             img.setImageResource(R.drawable.tmap);
-            Intent tIntent=new Intent(Driving.this,DrivingService.class);
             //TODO add tmap calling recording info to Service
-            startService(tIntent);
-
+            tIntent.setAction("tMap");
+            tIntent.putExtra("longitude",i.getDoubleExtra("longitude",1.0));
+            tIntent.putExtra("latitude",i.getDoubleExtra("latitude",1.0));
         }else{
             drivingTitle.setText(R.string.freeDrive);
             drivingCaution.setText(R.string.cautionFreedrive);
             img.setImageResource(R.drawable.freedrive);
             //TODO add recording
+            tIntent.setAction("freeDrive");
         }
+
+        startService(tIntent);
     }
 }

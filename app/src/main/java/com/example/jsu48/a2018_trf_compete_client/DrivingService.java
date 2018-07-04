@@ -6,11 +6,14 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 
+import com.skt.Tmap.TMapTapi;
+
 import java.util.Locale;
 
 public class DrivingService extends Service {
     boolean isTmap = true;
     double longitude, latitude;//GPS
+    double tLong,tLat;//tMap
     private TextToSpeech tts;
 
     @Nullable
@@ -36,8 +39,10 @@ public class DrivingService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         String action=intent.getAction();
-        if(action.equals("T")){
-
+        if(action.equals("tMap")){
+            tLong=intent.getDoubleExtra("longitude",1.0);
+            tLat=intent.getDoubleExtra("latitude",1.0);
+            TMapTapi t;
         }
         return startId;
     }
