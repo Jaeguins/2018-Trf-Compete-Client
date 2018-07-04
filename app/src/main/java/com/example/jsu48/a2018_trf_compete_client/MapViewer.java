@@ -2,9 +2,6 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.PointF;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -30,7 +27,7 @@ public class MapViewer extends AppCompatActivity {
     LinearLayout tmapLayView;
     ConstraintLayout searchShow;
     CustTMapView tMapView;
-
+    GPSManager gps;
     TextView searchResult;
     EditText input;
     int resultNum = 0;
@@ -44,7 +41,7 @@ public class MapViewer extends AppCompatActivity {
             ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                     0 );
         }
-
+        gps=new GPSManager(this);
         searchShow = findViewById(R.id.searchShow);
         tmapLayView = findViewById(R.id.tMapLayout);
         tMapView = new CustTMapView(this,R.drawable.marker);
@@ -59,6 +56,8 @@ public class MapViewer extends AppCompatActivity {
         input =findViewById(R.id.inputLoc);
         searchResult = findViewById(R.id.searchResultHint);
         tMapView.setCompassMode(true);
+        tMapView.setLocationPoint(gps.getLongitude(),gps.getLatitude());
+        tMapView.setCenterPoint(gps.getLongitude(),gps.getLatitude());
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
