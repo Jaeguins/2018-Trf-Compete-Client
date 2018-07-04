@@ -72,4 +72,9 @@ public class PreDrive extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        findViewById(R.id.activity).performClick();
+    }
 }

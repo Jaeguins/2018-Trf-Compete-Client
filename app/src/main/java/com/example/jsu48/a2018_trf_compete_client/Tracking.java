@@ -22,6 +22,7 @@ public class Tracking extends AppCompatActivity {
     GPSManager gps;
     GPSThread k;
     TMapPolyLine path;
+    int pathCounter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class Tracking extends AppCompatActivity {
         viewer.addView(mapView);
         gps = new GPSManager(this);
         mapView.setZoomLevel(18);
-        k = new GPSThread(mapView, gps);
+        k = new GPSThread();
         k.start();
         Intent i=getIntent();
         final TMapPoint targetPoint=new TMapPoint(i.getDoubleExtra("latitude",1.0),i.getDoubleExtra("longitude",1.0));
@@ -56,14 +57,11 @@ public class Tracking extends AppCompatActivity {
         super.onDestroy();
         k.stopping=true;
     }
+    double getDistance(TMapPoint a,TMapPoint b){
+        return Math.sqrt(Math.pow(a.getLatitude()-b.getLatitude(),2)+Math.pow(a.getLongitude()-b.getLongitude(),2));
+    }
     class GPSThread extends Thread{
-        TMapView mapView;
-        GPSManager gps;
         boolean stopping=false;
-        public GPSThread(TMapView mapView,GPSManager gps){
-            this.mapView=mapView;
-            this.gps=gps;
-        }
         @Override
         public void run() {
             while(true) {
@@ -75,6 +73,11 @@ public class Tracking extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                /////TODO next curve notification
+                TMapPoint tmpPoint=path.getLinePoint().get(pathCounter+1);
+                if(getDistance(tmpPoint,new TMapPoint(gps.getLatitude(),gps.getLongitude()))<10){
+                    pathCounter+=1;
+                };
                 if(stopping) break;
             }
         }

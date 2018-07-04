@@ -2,6 +2,7 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ class ResultViewHolder extends RecyclerView.ViewHolder{
                 intent.putExtra("longitude",longitude);
                 intent.putExtra("latitude",latitude);
                 view.getContext().startActivity(intent);
+                ((AppCompatActivity)view.getContext()).finish();
             }
         });
         itemView.setOnClickListener(new View.OnClickListener() {
