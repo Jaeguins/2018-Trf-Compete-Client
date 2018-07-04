@@ -22,14 +22,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.skt.Tmap.TMapData;
-import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapPOIItem;
-import com.skt.Tmap.TMapPoint;
-import com.skt.Tmap.TMapView;
-
-import java.util.ArrayList;
-
 public class MapViewer extends AppCompatActivity {
     Button searchBtn, closeSearchResult;
     SearchAdapter adap;
@@ -108,9 +100,6 @@ public class MapViewer extends AppCompatActivity {
         }
         //  tMapView.setCenterPoint()
     }
-
-
-
     public void closeSearch() {
         searchShow.setVisibility(View.GONE);
         adap.deleteAll();
@@ -124,89 +113,4 @@ public class MapViewer extends AppCompatActivity {
         }
     }
 }
-class CustTMapView extends TMapView{
-    TMapData tmapdata;
-    Bitmap mapMarker;
-    TMapMarkerItem formerMarker=new TMapMarkerItem();
-    CustLongClickCallback longCall;
-    public CustTMapView(Context context,int src){
-        super(context);
-        mapMarker = BitmapFactory.decodeResource(this.getResources(), src);
-        mapMarker=Bitmap.createScaledBitmap(mapMarker, 50, 100, false);
-        this.tmapdata = new TMapData();
-        this.setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
-        this.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
-            @Override
-            public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                if (arrayList.size() > 0) {
-                    formerMarker.setCanShowCallout(false);
-                    formerMarker = arrayList.get(0);
-                    formerMarker.setCanShowCallout(true);
-                }
-                return false;
-            }
-            @Override
-            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                return false;
-            }
-        });
-        longCall=new CustLongClickCallback(context);
-        this.setOnLongClickListenerCallback(longCall);
-    }
-    class CustLongClickCallback implements TMapView.OnLongClickListenerCallback{
-        MapViewer activity;
-        @Override
-        public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
-            activity.closeSearch();
-            try {
-                tmapdata.convertGpsToAddress(tMapPoint.getLatitude(), tMapPoint.getLongitude(),
-                        new TMapData.ConvertGPSToAddressListenerCallback() {
-                            @Override
-                            public void onConvertToGPSToAddress(String strAddress) {
-                                activity.input.setText(strAddress);
-                                activity.tMapView.searchLoc(strAddress);
-                            }
-                        });
-            } catch (Exception e) {}
-        }
-        public CustLongClickCallback(Context activity){
-            this.activity=(MapViewer)activity;
-        }
-    }
-    public void searchLoc(String keyWord) {
 
-        tmapdata.findAllPOI(keyWord, new TMapData.FindAllPOIListenerCallback() {
-            @Override
-            public void onFindAllPOI(ArrayList poiItem) {
-                final MapViewer cont=(MapViewer)CustTMapView.this.getContext();
-                cont.resultNum = poiItem.size();
-                removeAllMarkerItem();
-                if (poiItem.size() > 0) {
-                    for (int i = 0; i < poiItem.size(); i++) {
-                        TMapPOIItem item = (TMapPOIItem) poiItem.get(i);
-                        TMapMarkerItem markerItem1 = new TMapMarkerItem();
-                        markerItem1.setIcon(mapMarker); // 마커 아이콘 지정
-                        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-                        markerItem1.setTMapPoint(item.getPOIPoint()); // 마커의 좌표 지정
-                        markerItem1.setName(item.getPOIName()); // 마커의 타이틀 지정
-                        markerItem1.setCalloutTitle(item.getPOIName());
-                        addMarkerItem("marker" + i, markerItem1);
-                        cont.adap.add(item);
-                    }
-                }
-                cont.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        cont.adap.notifyDataSetChanged();
-                        cont.setSearchResultIndicator();
-                    }
-                });
-                if (poiItem.size() > 0) {
-                    TMapPOIItem tCent = (TMapPOIItem) poiItem.get(0);
-                    setCenterPoint(tCent.getPOIPoint().getLongitude(), tCent.getPOIPoint().getLatitude(), true);
-                }
-            }
-        });
-
-    }
-}
