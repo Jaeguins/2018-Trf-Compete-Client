@@ -63,15 +63,18 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
     <style name="sign">
-        <item name="android:width">100dp</item>
-        <item name="android:height">100dp</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:scaleType">fitXY</item>
     </style>
     <style name="nowTurn">
-        <item name="android:width">150dp</item>
-        <item name="android:height">150dp</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:scaleType">fitXY</item>
     </style>
     <style name="nextTurn">
-        <item name="android:width">500dp</item>
-        <item name="android:height">500dp</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:scaleType">fitXY</item>
     </style>
 </resources>

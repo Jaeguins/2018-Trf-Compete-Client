@@ -55,7 +55,6 @@ public class MapViewer extends AppCompatActivity {
         recyclerView.setAdapter(adap);
         input =findViewById(R.id.inputLoc);
         searchResult = findViewById(R.id.searchResultHint);
-        tMapView.setCompassMode(true);
         tMapView.setLocationPoint(gps.getLongitude(),gps.getLatitude());
         tMapView.setCenterPoint(gps.getLongitude(),gps.getLatitude());
         searchBtn.setOnClickListener(new View.OnClickListener() {

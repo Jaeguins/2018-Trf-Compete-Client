@@ -18,23 +18,22 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/turnInfo"
+        style="@style/itemContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/nowTurn"
+            style="@style/itemContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/nowImage"
                 style="@style/nowTurn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -42,9 +41,11 @@
 
             <TextView
                 android:id="@+id/nowDist"
+                style="@style/itemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textSize="64dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/nowImage"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +54,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/nextTurn"
+            style="@style/itemContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,8 +63,6 @@
             <ImageView
                 android:id="@+id/nextImage"
                 style="@style/nextTurn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -70,6 +70,7 @@
 
             <TextView
                 android:id="@+id/nextDist"
+                style="@style/itemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -83,6 +84,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/signInfo"
+        style="@style/itemContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -93,8 +95,6 @@
         <ImageView
             android:id="@+id/signImage"
             style="@style/sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -102,6 +102,7 @@
 
         <TextView
             android:id="@+id/signDist"
+            style="@style/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
