@@ -74,6 +74,7 @@ public class Tracking extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 /////TODO next curve notification
+                
                 TMapPoint tmpPoint=path.getLinePoint().get(pathCounter+1);
                 if(getDistance(tmpPoint,new TMapPoint(gps.getLatitude(),gps.getLongitude()))<10){
                     pathCounter+=1;
