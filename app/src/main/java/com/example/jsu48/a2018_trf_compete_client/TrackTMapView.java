@@ -14,7 +14,7 @@ public class TrackTMapView extends TMapView {
     public TrackTMapView(Context context) {
         super(context);
         setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
-        this.setCompassMode(true);
+        //this.setCompassMode(true);
         this.setOnClickListenerCallBack(new OnClickListenerCallback(){
 
             @Override
@@ -25,9 +25,10 @@ public class TrackTMapView extends TMapView {
 
             @Override
             public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                TrackTMapView.this.setCompassMode(true);
+                //TrackTMapView.this.setCompassMode(true);
                 return false;
             }
         });
     }
+
 }
