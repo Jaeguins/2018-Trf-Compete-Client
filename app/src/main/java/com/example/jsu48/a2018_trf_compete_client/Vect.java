@@ -46,6 +46,9 @@ public class Vect {
     public static double getDist(Vect in,Vect out){
         return Math.sqrt(Math.pow(in.getX()-out.getX(),2)+Math.pow(in.getY()-out.getY(),2));
     }
+    public static double getDist(TMapPoint a,TMapPoint b){
+        return getDist(new Vect(a),new Vect(b));
+    }
     private class Deg2UTM
     {
         double Easting;
