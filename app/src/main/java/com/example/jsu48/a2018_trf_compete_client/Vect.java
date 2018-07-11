@@ -26,6 +26,7 @@ public class Vect {
         this.x=x;
         this.y=y;
     }
+    public Vect(){};
     public Vect(TMapPoint input){
         Deg2UTM k=new Deg2UTM(input.getLatitude(),input.getLongitude());
         this.x=k.Easting;

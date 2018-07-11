@@ -29,16 +29,21 @@ public class Tracking extends AppCompatActivity {
     TrackTMapView mapView;
     GPSManager gps;
     TMapPolyLine path;
+    TextView nowDist,nextDist;
+    ImageView nowTurn,nextTurn;
     int pathCounter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+        nowDist=findViewById(R.id.nowDist);
+        nextDist=findViewById(R.id.nextDist);
+        nowTurn=findViewById(R.id.nowImage);
+        nextTurn=findViewById(R.id.nextImage);
+        gps = new GPSManager(this);
         mapView = new TrackTMapView(this);
         LinearLayout viewer = findViewById(R.id.mapViewer);
         viewer.addView(mapView);
-        gps = new GPSManager(this);
-
         //mapView.setZoomLevel(18);
         Intent i=getIntent();
         final TMapPoint targetPoint=new TMapPoint(i.getDoubleExtra("latitude",1.0),i.getDoubleExtra("longitude",1.0));
@@ -72,5 +77,13 @@ public class Tracking extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.r.stopRun();
+    }
+    public void changeNow(int imgRes,double distance){
+        nowTurn.setImageResource(imgRes);
+        nowDist.setText((int)distance+"m");
+    }
+    public void changeNext(int imgRes,int distance){
+        nextTurn.setImageResource(imgRes);
+        nextDist.setText(distance+"m");
     }
 }
