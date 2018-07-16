@@ -3,6 +3,7 @@ package com.example.jsu48.a2018_trf_compete_client;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.skt.Tmap.TMapData;
+import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-public class Tracking extends AppCompatActivity {
+public class Tracking extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback{
     TrackTMapView mapView;
     GPSManager gps;
     TMapPolyLine path;
@@ -46,6 +48,7 @@ public class Tracking extends AppCompatActivity {
         LinearLayout viewer = findViewById(R.id.mapViewer);
         viewer.addView(mapView);
         Intent i=getIntent();
+
         if(i.getAction().equals("free")){
             mapView.setDestinated(false);
         }
@@ -89,5 +92,10 @@ public class Tracking extends AppCompatActivity {
     public void changeNext(int imgRes,double distance){
         nextTurn.setImageResource(imgRes);
         nextDist.setText((int)distance+"m");
+    }
+
+    @Override
+    public void onLocationChange(Location location) {
+        mapView.setLocationPoint(location.getLongitude(),location.getLatitude());
     }
 }

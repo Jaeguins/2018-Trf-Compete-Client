@@ -2,7 +2,10 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.graphics.PointF;
+import android.location.Location;
 
+import com.skt.Tmap.TMapGpsManager;
+import com.skt.Tmap.TMapGpsManager.*;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -15,10 +18,12 @@ public class TrackTMapView extends TMapView {
     ArrayList<TMapPoint> field;
     Refresher r;
     Tracking cont;
+    TMapGpsManager gpsM=new TMapGpsManager(this.getContext());
+
     boolean isDestinated=true;
     public void setField(TMapPolyLine line, GPSManager gps) {
         this.field = line.getLinePoint();
-        r = new Refresher(gps);
+        r = new Refresher();
         r.start();
     }
 
@@ -28,6 +33,10 @@ public class TrackTMapView extends TMapView {
 
     public TrackTMapView(Context context) {
         super(context);
+        gpsM.setMinTime(1000);
+        gpsM.setMinDistance(5);
+        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
+        gpsM.OpenGps();
         setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         cont = (Tracking) (TrackTMapView.this.getContext());
         this.setOnClickListenerCallBack(new OnClickListenerCallback() {
@@ -44,17 +53,10 @@ public class TrackTMapView extends TMapView {
         });
 
     }
-
     class Refresher extends Thread {
         boolean stopper = false;
-        GPSManager gps;
         TMapPoint closest;
         TMapPoint here;
-
-
-        public Refresher(GPSManager gps) {
-            this.gps = gps;
-        }
 
         public void stopRun() {
             stopper = true;
@@ -62,22 +64,33 @@ public class TrackTMapView extends TMapView {
 
         @Override
         public void run() {
-            for (int i = 0; i < field.size(); i++) {
+            /*for (int i = 0; i < field.size(); i++) {
                 TMapMarkerItem t = new TMapMarkerItem();
                 t.setCalloutTitle("" + i);
                 t.setAutoCalloutVisible(true);
                 t.setCanShowCallout(true);
                 t.setTMapPoint(field.get(i));
                 addMarkerItem("" + i, t);
-            }
+            }*/
+
             while (!stopper) {
+                gpsM.setLocationCallback();
                 double dist = 0.0;
-                gps.getLocation();
-                here = new TMapPoint(gps.getLatitude(), gps.getLongitude());
-                setCenterPoint(gps.getLongitude(), gps.getLatitude());
+
+                here = getLeftTopPoint();
+                //setCenterPoint(here.getLongitude(),gps.getLatitude());
                 setCompassMode(true);
+                setSightVisible(true);
+                setTrackingMode(true);
                 setZoomLevel(18);
-                if(!isDestinated)continue;
+                if(!isDestinated){
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    continue;
+                }
                 //현위치 갱신 및 현위치 지도 갱신
                 double min = 999999999999.0;
                 int minInd = 0;
@@ -212,6 +225,7 @@ public class TrackTMapView extends TMapView {
                     e.printStackTrace();
                 }
             }
+            gpsM.CloseGps();
         }
     }
 }
