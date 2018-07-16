@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,8 +45,10 @@ public class Tracking extends AppCompatActivity {
         mapView = new TrackTMapView(this);
         LinearLayout viewer = findViewById(R.id.mapViewer);
         viewer.addView(mapView);
-        //mapView.setZoomLevel(18);
         Intent i=getIntent();
+        if(i.getAction().equals("free")){
+            mapView.setDestinated(false);
+        }
         final TMapPoint targetPoint=new TMapPoint(i.getDoubleExtra("latitude",1.0),i.getDoubleExtra("longitude",1.0));
         Thread p=new Thread(new Runnable(){
             @Override
@@ -79,11 +82,12 @@ public class Tracking extends AppCompatActivity {
         mapView.r.stopRun();
     }
     public void changeNow(int imgRes,double distance){
+        findViewById(R.id.turnInfo).setVisibility(View.VISIBLE);
         nowTurn.setImageResource(imgRes);
         nowDist.setText((int)distance+"m");
     }
-    public void changeNext(int imgRes,int distance){
+    public void changeNext(int imgRes,double distance){
         nextTurn.setImageResource(imgRes);
-        nextDist.setText(distance+"m");
+        nextDist.setText((int)distance+"m");
     }
 }

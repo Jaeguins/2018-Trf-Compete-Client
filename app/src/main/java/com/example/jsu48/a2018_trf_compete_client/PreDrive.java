@@ -50,6 +50,8 @@ public class PreDrive extends AppCompatActivity {
                         } else {
                             intent.setAction("free");
                             startActivity(intent);
+                            img.setImageResource(R.drawable.gear);
+                            txt.setText(R.string.gearR);
                         }
                         break;
                     case 3:

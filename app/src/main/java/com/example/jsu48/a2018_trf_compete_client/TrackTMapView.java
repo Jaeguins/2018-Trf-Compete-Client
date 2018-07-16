@@ -15,17 +15,20 @@ public class TrackTMapView extends TMapView {
     ArrayList<TMapPoint> field;
     Refresher r;
     Tracking cont;
-
+    boolean isDestinated=true;
     public void setField(TMapPolyLine line, GPSManager gps) {
         this.field = line.getLinePoint();
         r = new Refresher(gps);
         r.start();
     }
 
+    public void setDestinated(boolean destinated) {
+        isDestinated = destinated;
+    }
+
     public TrackTMapView(Context context) {
         super(context);
         setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
-        //this.setCompassMode(true);
         cont = (Tracking) (TrackTMapView.this.getContext());
         this.setOnClickListenerCallBack(new OnClickListenerCallback() {
 
@@ -36,7 +39,6 @@ public class TrackTMapView extends TMapView {
 
             @Override
             public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                //TrackTMapView.this.setCompassMode(true);
                 return false;
             }
         });
@@ -73,6 +75,9 @@ public class TrackTMapView extends TMapView {
                 gps.getLocation();
                 here = new TMapPoint(gps.getLatitude(), gps.getLongitude());
                 setCenterPoint(gps.getLongitude(), gps.getLatitude());
+                setCompassMode(true);
+                setZoomLevel(18);
+                if(!isDestinated)continue;
                 //현위치 갱신 및 현위치 지도 갱신
                 double min = 999999999999.0;
                 int minInd = 0;
@@ -108,18 +113,18 @@ public class TrackTMapView extends TMapView {
                     }
                     if (angle > Math.PI * 3 / 4 || angle < Math.PI * -3 / 4) {
                         dir = 0;
-                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + i);
+                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else if (angle > Math.PI / 4) {
                         dir = 1;
-                        System.out.println("turn left after " + (int)dist + "m from " + minInd + " to " + i);
+                        System.out.println("turn left after " + (int)dist + "m from " + minInd + " to " + j);
                         break;
                     } else if (angle < Math.PI / -4) {
                         dir = 2;
-                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + i);
+                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else {
-                        System.out.println("go next node : "+minInd+" to "+i);
+                        System.out.println("go next node : "+minInd+" to "+j);
                         in=out;
                         minInd=i;
                         i=j;
@@ -145,15 +150,11 @@ public class TrackTMapView extends TMapView {
                     }
                 });
                 //이번 코너 탐지/거리 갱신
-
-                out = new Vect();
-                while(minInd+i<field.size()) {
-                    for(;minInd+i<field.size()-1;i++){
-                        in = Vect.getVect(new Vect(field.get(minInd + i)), new Vect(field.get(minInd + i + 1)));
-                        if (in.x != 0 || in.y != 0) break;
-                    }
-                    for (; minInd + i < field.size() - 1; i++) {
-                        out = Vect.getVect(new Vect(field.get(minInd + i)), new Vect(field.get(minInd + 1 + i)));
+                in=out;
+                j=i;
+                while(j<field.size()) {
+                    for (; j< field.size() ; j++) {
+                        out = Vect.getVect(new Vect(field.get(i)), new Vect(field.get(j)));
                         if (out.x != 0 || out.y != 0) break;
                     }
                     dist += in.getSize();
@@ -162,41 +163,44 @@ public class TrackTMapView extends TMapView {
                     if (angle > Math.PI) {
                         angle = 2 * Math.PI - angle;
                     }
-                    if (angle > Math.PI * 7 / 8 || angle < Math.PI * -7 / 8) {
+                    if (angle > Math.PI * 3 / 4 || angle < Math.PI * -3 / 4) {
                         dir = 0;
-                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + (minInd + i));
+                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + j);
                         break;
-                    } else if (angle > Math.PI / 8) {
+                    } else if (angle > Math.PI / 4) {
                         dir = 1;
-                        System.out.println("turn left after " + dist + "m from " + minInd + " to " + (minInd + i));
+                        System.out.println("turn left after " + (int)dist + "m from " + minInd + " to " + j);
                         break;
-                    } else if (angle < Math.PI / -8) {
+                    } else if (angle < Math.PI / -4) {
                         dir = 2;
-                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + (minInd + i));
+                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else {
-                        i+=1;
-                        //System.out.println("go next node : "+minInd+" to "+(minInd+i));
+                        System.out.println("go next node : "+minInd+" to "+j);
+                        in=out;
+                        minInd=i;
+                        i=j;
                         continue;
                     }
                 }
-                final int nDir = dir, nDist = (int) dist;
+                final int nDir = dir;
+                final double nDist = dist;
                 cont.runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       switch (nDir) {
-                           case 0:
-                               cont.changeNow(R.drawable.uturn, nDist);
-                               break;
-                           case 1:
-                               cont.changeNow(R.drawable.left, nDist);
-                               break;
-                           case 2:
-                               cont.changeNow(R.drawable.right, nDist);
-                               break;
-                       }
-                   }
-               });
+                    @Override
+                    public void run() {
+                        switch (nDir) {
+                            case 0:
+                                cont.changeNext(R.drawable.uturn, nDist);
+                                break;
+                            case 1:
+                                cont.changeNext(R.drawable.left, nDist);
+                                break;
+                            case 2:
+                                cont.changeNext(R.drawable.right, nDist);
+                                break;
+                        }
+                    }
+                });
                 //다음 코너 탐지/거리 갱신
                 try
                 {
