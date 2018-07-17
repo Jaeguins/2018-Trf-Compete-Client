@@ -12,13 +12,17 @@ public class DestTMapView extends TMapView {
     Bitmap mapMarker;
     TMapMarkerItem formerMarker = new TMapMarkerItem();
     CustLongClickCallback longCall;
-
-    public DestTMapView(Context context, int src) {
+    TMapGpsManager gpsM;
+    public DestTMapView(Context context, int src,TMapGpsManager gps) {
         super(context);
+        this.gpsM = gps;
+        gpsM.setMinTime(1000);
+        gpsM.setMinDistance(5);
+        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
+        gpsM.OpenGps();
         mapMarker = BitmapFactory.decodeResource(this.getResources(), src);
         mapMarker = Bitmap.createScaledBitmap(mapMarker, 50, 100, false);
         this.tmapdata = new TMapData();
-        this.setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         this.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
             @Override
             public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
@@ -44,7 +48,6 @@ public class DestTMapView extends TMapView {
 
         @Override
         public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
-            activity.closeSearch();
             try {
                 tmapdata.convertGpsToAddress(tMapPoint.getLatitude(), tMapPoint.getLongitude(),
                         new TMapData.ConvertGPSToAddressListenerCallback() {

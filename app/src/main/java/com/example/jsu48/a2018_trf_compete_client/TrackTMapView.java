@@ -2,6 +2,7 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.graphics.PointF;
+import android.util.Log;
 
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
@@ -21,6 +22,19 @@ public class TrackTMapView extends TMapView {
     boolean isDestinated=true;
     public void setField(TMapPolyLine line) {
         this.field = line.getLinePoint();
+        for(int i=0;i<field.size()-1;i++){
+            Vect tmp=Vect.getVect(new Vect(field.get(i)), new Vect(field.get(i+1)));
+            Log.d("path optimize",i+" : "+tmp.getSize()+"");
+            if(tmp.getSize()<=2){
+                field.remove(i);
+                i-=1;
+            }
+        }
+        TMapPolyLine optLine=new TMapPolyLine();
+        for(int i=0;i<field.size();i++){
+            optLine.addLinePoint(field.get(i));
+        }
+        addTMapPolyLine("path",optLine);
         r = new Refresher();
         r.start();
     }
@@ -32,7 +46,6 @@ public class TrackTMapView extends TMapView {
     public TrackTMapView(Context context,TMapGpsManager gps) {
         super(context);
         gpsM=gps;
-        setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         cont = (Tracking) (TrackTMapView.this.getContext());
         this.setOnClickListenerCallBack(new OnClickListenerCallback() {
 
@@ -59,31 +72,32 @@ public class TrackTMapView extends TMapView {
 
         @Override
         public void run() {
-            /*for (int i = 0; i < field.size(); i++) {
+
+            for (int i = 0; i < field.size(); i++) {
                 TMapMarkerItem t = new TMapMarkerItem();
                 t.setCalloutTitle("" + i);
                 t.setAutoCalloutVisible(true);
                 t.setCanShowCallout(true);
                 t.setTMapPoint(field.get(i));
                 addMarkerItem("" + i, t);
-            }*/
+            }
 
             while (!stopper) {
                 gpsM.setLocationCallback();
                 double dist = 0.0;
 
                 here = getLeftTopPoint();
-                //setCenterPoint(here.getLongitude(),gps.getLatitude());
-                setCompassMode(true);
-                setSightVisible(true);
                 setTrackingMode(true);
-                setZoomLevel(18);
+                /*setCompassMode(true);
+                setSightVisible(true);
+                setZoomLevel(18);*/
                 if(!isDestinated){
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    Log.d("TrackMapView","freedriving, skip corner detection");
                     continue;
                 }
                 //현위치 갱신 및 현위치 지도 갱신
@@ -105,34 +119,29 @@ public class TrackTMapView extends TMapView {
                 Vect in=new Vect(), out = new Vect();
                 for(;i<field.size();i++){
                     in = Vect.getVect(new Vect(field.get(minInd)), new Vect(field.get(i)));
-                    if (in.x != 0 || in.y != 0) break;
                 }
                 int j=i;
                 while(j<field.size()) {
                     for (; j< field.size() ; j++) {
                         out = Vect.getVect(new Vect(field.get(i)), new Vect(field.get(j)));
-                        if (out.x != 0 || out.y != 0) break;
                     }
                     dist += in.getSize();
                     angle = Vect.getAngle(in, out);
-
+                    Log.d("rotation",minInd+" : "+j+" angle : "+angle);
                     if (angle > Math.PI) {
                         angle = 2 * Math.PI - angle;
                     }
+
                     if (angle > Math.PI * 3 / 4 || angle < Math.PI * -3 / 4) {
                         dir = 0;
-                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else if (angle > Math.PI / 4) {
                         dir = 1;
-                        System.out.println("turn left after " + (int)dist + "m from " + minInd + " to " + j);
                         break;
                     } else if (angle < Math.PI / -4) {
                         dir = 2;
-                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else {
-                        System.out.println("go next node : "+minInd+" to "+j);
                         in=out;
                         minInd=i;
                         i=j;
@@ -171,20 +180,18 @@ public class TrackTMapView extends TMapView {
                     if (angle > Math.PI) {
                         angle = 2 * Math.PI - angle;
                     }
+                    Log.d("rotation",minInd+" : "+j+" angle : "+angle);
                     if (angle > Math.PI * 3 / 4 || angle < Math.PI * -3 / 4) {
                         dir = 0;
-                        System.out.println("turn around after " + dist + "m from " + minInd + " to " + j);
+
                         break;
                     } else if (angle > Math.PI / 4) {
                         dir = 1;
-                        System.out.println("turn left after " + (int)dist + "m from " + minInd + " to " + j);
                         break;
                     } else if (angle < Math.PI / -4) {
                         dir = 2;
-                        System.out.println("turn right after " + dist + "m from " + minInd + " to " + j);
                         break;
                     } else {
-                        System.out.println("go next node : "+minInd+" to "+j);
                         in=out;
                         minInd=i;
                         i=j;

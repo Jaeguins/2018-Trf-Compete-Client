@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.skt.Tmap.TMapTapi;
+
 public class MainActivity extends AppCompatActivity {
     Button mapBtn,freeBtn,statBtn,setBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new TMapTapi(this).setSKTMapAuthentication("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         setContentView(R.layout.activity_initial);
         mapBtn=findViewById(R.id.mapButton);
         mapBtn.setOnClickListener(new View.OnClickListener(){

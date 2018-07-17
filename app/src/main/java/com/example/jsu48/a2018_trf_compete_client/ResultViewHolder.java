@@ -26,6 +26,8 @@ class ResultViewHolder extends RecyclerView.ViewHolder{
                 intent.setAction("map");
                 intent.putExtra("longitude",longitude);
                 intent.putExtra("latitude",latitude);
+                intent.putExtra("slongitude",ind.getLocationPoint().getLongitude());
+                intent.putExtra("slatitude",ind.getLocationPoint().getLatitude());
                 view.getContext().startActivity(intent);
                 ((AppCompatActivity)view.getContext()).finish();
             }

@@ -48,12 +48,13 @@ public class Tracking extends AppCompatActivity implements TMapGpsManager.onLoca
         if(i.getAction().equals("free")){
             mapView.setDestinated(false);
         }
+        final TMapPoint startPoint=new TMapPoint(i.getDoubleExtra("slatitude",1.0),i.getDoubleExtra("slongitude",1.0));
         final TMapPoint targetPoint=new TMapPoint(i.getDoubleExtra("latitude",1.0),i.getDoubleExtra("longitude",1.0));
         Thread p=new Thread(new Runnable(){
             @Override
             public void run(){
                 try {
-                    Tracking.this.path=new TMapData().findPathData(gpsM.getLocation(),targetPoint);
+                    Tracking.this.path=new TMapData().findPathData(startPoint,targetPoint);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ParserConfigurationException e) {
@@ -64,7 +65,6 @@ public class Tracking extends AppCompatActivity implements TMapGpsManager.onLoca
                 path.setLineColor(Color.RED);
                 path.setLineWidth(50.0f);
                 path.setLineAlpha(255);
-                mapView.addTMapPolyLine("path",path);
                 mapView.setField(path);
             }
         });

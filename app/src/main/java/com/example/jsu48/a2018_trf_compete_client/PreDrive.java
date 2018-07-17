@@ -39,7 +39,8 @@ public class PreDrive extends AppCompatActivity {
                             intent.setAction("map");
                             intent.putExtra("longitude", i.getDoubleExtra("longitude", -1.0));
                             intent.putExtra("latitude", i.getDoubleExtra("latitude", -1.0));
-                            startActivity(intent);
+                            intent.putExtra("slongitude", i.getDoubleExtra("slongitude", -1.0));
+                            intent.putExtra("slatitude", i.getDoubleExtra("slatitude", -1.0));                            startActivity(intent);
                             img.setImageResource(R.drawable.gear);
                             txt.setText(R.string.gearR);
                         } else {

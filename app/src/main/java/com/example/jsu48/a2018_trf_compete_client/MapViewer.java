@@ -2,6 +2,7 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -21,7 +23,7 @@ import android.widget.TextView;
 
 import com.skt.Tmap.TMapGpsManager;
 
-public class MapViewer extends AppCompatActivity {
+public class MapViewer extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback{
     Button searchBtn, closeSearchResult;
     SearchAdapter adap;
     RecyclerView recyclerView;
@@ -32,6 +34,7 @@ public class MapViewer extends AppCompatActivity {
     TextView searchResult;
     EditText input;
     int resultNum = 0;
+    boolean initialLocSetter=true;
     TMapGpsManager gpsM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class MapViewer extends AppCompatActivity {
         }
         searchShow = findViewById(R.id.searchShow);
         tmapLayView = findViewById(R.id.tMapLayout);
-        tMapView = new DestTMapView(this,R.drawable.marker);
+        gpsM=new TMapGpsManager(this);
+        tMapView = new DestTMapView(this,R.drawable.marker,gpsM);
         tmapLayView.addView(tMapView);
         searchBtn = findViewById(R.id.searchButton);
         closeSearchResult = findViewById(R.id.closeSearchResult);
@@ -55,17 +59,6 @@ public class MapViewer extends AppCompatActivity {
         recyclerView.setAdapter(adap);
         input =findViewById(R.id.inputLoc);
         searchResult = findViewById(R.id.searchResultHint);
-        gpsM=new TMapGpsManager(this);
-        gpsM.setMinTime(1000);
-        gpsM.setMinDistance(5);
-        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
-        gpsM.OpenGps();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tMapView.setCenterPoint(gpsM.getLocation().getLongitude(),gpsM.getLocation().getLatitude(),true);
-            }
-        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +104,11 @@ public class MapViewer extends AppCompatActivity {
         searchShow.setVisibility(View.GONE);
         adap.deleteAll();
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        gpsM.CloseGps();
+    }
     public void setSearchResultIndicator() {
         if (resultNum == 0) searchResult.setText(R.string.searchResultZero);
         else {
@@ -119,5 +116,15 @@ public class MapViewer extends AppCompatActivity {
             searchResult.setText(searchResult.getText().toString() + resultNum);
         }
     }
+    @Override
+    public void onLocationChange(Location location) {
+        tMapView.setLocationPoint(location.getLongitude(),location.getLatitude());
+        if(initialLocSetter){
+            initialLocSetter=false;
+            tMapView.setCenterPoint(location.getLongitude(),location.getLatitude());
+        }
+        Log.d("MapViewer",location.toString());
+    }
+
 }
 
