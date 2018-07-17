@@ -2,10 +2,8 @@ package com.example.jsu48.a2018_trf_compete_client;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.location.Location;
 
 import com.skt.Tmap.TMapGpsManager;
-import com.skt.Tmap.TMapGpsManager.*;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -18,7 +16,7 @@ public class TrackTMapView extends TMapView {
     ArrayList<TMapPoint> field;
     Refresher r;
     Tracking cont;
-    TMapGpsManager gpsM=new TMapGpsManager(this.getContext());
+    TMapGpsManager gpsM;
 
     boolean isDestinated=true;
     public void setField(TMapPolyLine line) {
@@ -31,12 +29,9 @@ public class TrackTMapView extends TMapView {
         isDestinated = destinated;
     }
 
-    public TrackTMapView(Context context) {
+    public TrackTMapView(Context context,TMapGpsManager gps) {
         super(context);
-        gpsM.setMinTime(1000);
-        gpsM.setMinDistance(5);
-        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
-        gpsM.OpenGps();
+        gpsM=gps;
         setSKTMapApiKey("4296b5d5-5254-4cc1-89a0-e6dfbb467f30");
         cont = (Tracking) (TrackTMapView.this.getContext());
         this.setOnClickListenerCallBack(new OnClickListenerCallback() {
