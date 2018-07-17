@@ -1,54 +1,50 @@
 package com.example.jsu48.a2018_trf_compete_client;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
-import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
-import com.skt.Tmap.TMapView;
 
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 public class Tracking extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback{
     TrackTMapView mapView;
-    GPSManager gps;
     TMapPolyLine path;
     TextView nowDist,nextDist;
     ImageView nowTurn,nextTurn;
+    TMapGpsManager gpsM;
     int pathCounter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+        gpsM=new TMapGpsManager(this);
         nowDist=findViewById(R.id.nowDist);
         nextDist=findViewById(R.id.nextDist);
         nowTurn=findViewById(R.id.nowImage);
         nextTurn=findViewById(R.id.nextImage);
-        gps = new GPSManager(this);
-        mapView = new TrackTMapView(this);
+        mapView = new TrackTMapView(this,gpsM);
         LinearLayout viewer = findViewById(R.id.mapViewer);
         viewer.addView(mapView);
+        gpsM.setMinTime(1000);
+        gpsM.setMinDistance(5);
+        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
+        gpsM.OpenGps();
         Intent i=getIntent();
-
         if(i.getAction().equals("free")){
             mapView.setDestinated(false);
         }
@@ -56,9 +52,8 @@ public class Tracking extends AppCompatActivity implements TMapGpsManager.onLoca
         Thread p=new Thread(new Runnable(){
             @Override
             public void run(){
-                TMapPoint now=new TMapPoint(gps.getLatitude(),gps.getLongitude());
                 try {
-                    Tracking.this.path=new TMapData().findPathData(now,targetPoint);
+                    Tracking.this.path=new TMapData().findPathData(gpsM.getLocation(),targetPoint);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ParserConfigurationException e) {
@@ -70,7 +65,7 @@ public class Tracking extends AppCompatActivity implements TMapGpsManager.onLoca
                 path.setLineWidth(50.0f);
                 path.setLineAlpha(255);
                 mapView.addTMapPolyLine("path",path);
-                mapView.setField(path,gps);
+                mapView.setField(path);
             }
         });
         p.start();

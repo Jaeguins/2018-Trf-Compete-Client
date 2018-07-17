@@ -10,7 +10,7 @@ import com.skt.Tmap.TMapTapi;
 
 import java.util.Locale;
 
-public class DrivingService extends Service {
+public class LogginService extends Service {
     boolean isTmap = true;
     double longitude, latitude;//GPS
     double tLong,tLat;//tMap

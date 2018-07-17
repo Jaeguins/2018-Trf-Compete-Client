@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.skt.Tmap.TMapGpsManager;
+
 public class MapViewer extends AppCompatActivity {
     Button searchBtn, closeSearchResult;
     SearchAdapter adap;
@@ -27,11 +29,10 @@ public class MapViewer extends AppCompatActivity {
     LinearLayout tmapLayView;
     ConstraintLayout searchShow;
     DestTMapView tMapView;
-    GPSManager gps;
     TextView searchResult;
     EditText input;
     int resultNum = 0;
-
+    TMapGpsManager gpsM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,6 @@ public class MapViewer extends AppCompatActivity {
             ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                     0 );
         }
-        gps=new GPSManager(this);
         searchShow = findViewById(R.id.searchShow);
         tmapLayView = findViewById(R.id.tMapLayout);
         tMapView = new DestTMapView(this,R.drawable.marker);
@@ -55,8 +55,17 @@ public class MapViewer extends AppCompatActivity {
         recyclerView.setAdapter(adap);
         input =findViewById(R.id.inputLoc);
         searchResult = findViewById(R.id.searchResultHint);
-        tMapView.setLocationPoint(gps.getLongitude(),gps.getLatitude());
-        tMapView.setCenterPoint(gps.getLongitude(),gps.getLatitude());
+        gpsM=new TMapGpsManager(this);
+        gpsM.setMinTime(1000);
+        gpsM.setMinDistance(5);
+        gpsM.setProvider(gpsM.NETWORK_PROVIDER);
+        gpsM.OpenGps();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tMapView.setCenterPoint(gpsM.getLocation().getLongitude(),gpsM.getLocation().getLatitude(),true);
+            }
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
