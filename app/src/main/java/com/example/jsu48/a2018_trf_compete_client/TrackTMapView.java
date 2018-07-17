@@ -21,7 +21,7 @@ public class TrackTMapView extends TMapView {
     TMapGpsManager gpsM=new TMapGpsManager(this.getContext());
 
     boolean isDestinated=true;
-    public void setField(TMapPolyLine line, GPSManager gps) {
+    public void setField(TMapPolyLine line) {
         this.field = line.getLinePoint();
         r = new Refresher();
         r.start();
