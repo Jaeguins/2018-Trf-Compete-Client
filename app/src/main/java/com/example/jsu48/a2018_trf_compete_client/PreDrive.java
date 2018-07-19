@@ -3,7 +3,9 @@ package com.example.jsu48.a2018_trf_compete_client;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.TransitionManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ public class PreDrive extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predrive);
+
         i = getIntent();
         img = findViewById(R.id.imgView);
         txt = findViewById(R.id.textView);
@@ -25,6 +28,7 @@ public class PreDrive extends AppCompatActivity {
         findViewById(R.id.activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TransitionManager.beginDelayedTransition((ViewGroup)findViewById(R.id.show));
                 switch (count) {
                     case 0:
                         img.setImageResource(R.drawable.headlight);
